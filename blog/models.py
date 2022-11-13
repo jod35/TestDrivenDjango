@@ -18,3 +18,8 @@ class Entry(models.Model):
 
     class Meta:
         verbose_name_plural="Entries"
+        ordering = ['-created_at']
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('detail', kwargs={'id': self.pk})
