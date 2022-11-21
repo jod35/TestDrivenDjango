@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome to the blog</h1>
+<h2>These are the latest posts</h2>
+
+
+{% for post in posts %}
+    <div class="post">
+        <a href="{{post.get_absolute_url}}">{{post.title}}</a>
+        <p>{{post.body|truncatewords:30}}</p>
+    </div>
+{% endfor %}
+    
+{% endblock content %}
+    
