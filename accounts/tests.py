@@ -21,9 +21,7 @@ class AccountCreationTest(TestCase):
 
 
     def test_signup_form_works_correctly(self):
-
-        
-
+  
         self.assertTrue(issubclass(self.form_class,UserCreationForm))
         self.assertTrue('email' in  self.form_class.Meta.fields)
         self.assertTrue('username' in  self.form_class.Meta.fields)
