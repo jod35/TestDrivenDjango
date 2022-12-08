@@ -15,6 +15,7 @@
     <header>
       {% if user.is_authenticated %}
       <a href="{% url 'homepage' %}">Home</a>
+      <a href="{% url 'logout' %}">Log out</a>
       {% else %}
       <a href="{% url 'homepage' %}">Home</a>
       <a href="{% url 'signup_page' %}">Sign Up</a>
