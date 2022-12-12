@@ -3,5 +3,8 @@
 <form action="" method="post">
   {% csrf_token %} {{ form }}
   <input type="submit" value="Login" />
+  <small
+    ><p><a href="{% url 'password_reset' %}">Forgot Password?</a></p></small
+  >
 </form>
 {% endblock content %}
