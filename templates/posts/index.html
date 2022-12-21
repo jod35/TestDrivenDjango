@@ -1,15 +1,21 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Welcome to the blog</h1>
-<h2>These are the latest posts</h2>
-
+{% extends 'base.html' %} {% block content %}
+<div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4 fst-italic">Welcome to the TDD Blog</h1>
+    <p class="lead my-3">
+      This is a simple web application we built while learning TDD with Django
+    </p>
+  </div>
+</div>
 
 {% for post in posts %}
-    <div class="post">
-        <a href="{{post.get_absolute_url}}">{{post.title}}</a>
-        <p>{{post.body|truncatewords:30}}</p>
-    </div>
-{% endfor %}
-    
-{% endblock content %}
-    
+<article class="blog-post">
+  <h2 class="blog-post-title mb-1">{{post.title}}</h2>
+  <p class="blog-post-meta">
+    {{post.created_at}} <a href="#">{{post.author}}</a>
+  </p>
+
+  <p>{{post.body|truncatewords:30}}</p>
+  <hr />
+</article>
+{% endfor %} {% endblock content %}

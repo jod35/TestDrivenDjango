@@ -1,11 +1,9 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>Create Your account today</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Sign Up">
-    </form>
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<h1>Create Your account today</h1>
+<form action="" method="post">
+  {% csrf_token %} {{form|crispy}}
+  <input type="submit" value="Sign Up" class="btn btn-primary" />
+</form>
+<br />
+<br />
 {% endblock content %}
-    
