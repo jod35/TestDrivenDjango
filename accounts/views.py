@@ -51,3 +51,7 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect(reverse('homepage'))
+
+
+def current_user_profile(request):
+    return render(request,'accounts/currentuserprofile.html')
