@@ -3,7 +3,8 @@ from .forms import UserRegistrationForm
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout
-
+from posts.models import Post
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -52,6 +53,15 @@ def logout_user(request):
     logout(request)
     return redirect(reverse('homepage'))
 
-
+@login_required
 def current_user_profile(request):
-    return render(request,'accounts/currentuserprofile.html')
+    user = request.user
+
+    posts =  Post.objects.filter(author=user).all()
+
+    context ={
+        'user':user,
+        'posts': posts
+    }
+
+    return render(request,'accounts/currentuserprofile.html',context)
