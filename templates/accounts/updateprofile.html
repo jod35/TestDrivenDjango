@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section style="background-color: #fff">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{user.profile.profile_image}}" alt="avatar" class="rounded-circle img-fluid"
+                            style="width: 150px" />
+                        <h5 class="my-3">{{user.username}}</h5>
+                        <p class="text-muted mb-1">{{user.profile.bio}}</p>
+                        <p class="text-muted mb-4">{{user.profile.address}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <h1>Update User Information</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{user_form|crispy}}
+                    {{profile_form|crispy}}
+                    <br>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

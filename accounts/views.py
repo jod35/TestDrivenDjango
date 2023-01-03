@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login,logout
 from posts.models import Post
 from django.contrib.auth.decorators import login_required
+from .forms import UserUpdateForm,ProfileUpdateForm
 
 # Create your views here.
 
@@ -65,3 +66,31 @@ def current_user_profile(request):
     }
 
     return render(request,'accounts/currentuserprofile.html',context)
+
+@login_required
+def update_user_profile(request):
+    user_form = UserUpdateForm(instance=request.user)
+    profile_form = ProfileUpdateForm(instance=request.user.profile)
+
+    if request.method == "POST":
+        profile_form = ProfileUpdateForm(instance=request.user.profile,data={
+            'bio':request.POST.get('bio',None),
+            'address':request.POST.get('address',None)
+        })
+        user_form = UserUpdateForm(instance=request.user,data={
+            'first_name':request.POST.get('first_name',None),
+            'last_name':request.POST.get('last_name',None),
+            'username':request.POST.get('username',None),
+        })
+
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
+
+            return redirect(reverse('current_user_profile'))
+
+    context ={
+        'profile_form':profile_form,
+        'user_form':user_form
+    }
+    return render(request,'accounts/updateprofile.html',context)
